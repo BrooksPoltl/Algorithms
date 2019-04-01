@@ -6,8 +6,26 @@ import sys
 # a solution that is more efficient than the naive 
 # recursive solution
 def eating_cookies(n, cache=None):
-  pass
-
+  if n == 1:
+    return 1
+  elif n == 0:
+    return 1
+  elif n == 2:
+    return 2
+  def eat_cookie(list):
+    possibilities = 0
+    for i in list:
+      possibilities +=i
+    return possibilities
+  cookie_list = [1,1,2]
+  count = 3
+  while count <= n:
+    new_value = eat_cookie(cookie_list)
+    cookie_list.append(new_value)
+    cookie_list.pop(0)
+    count +=1
+  return cookie_list[2]
+print(eating_cookies(7))
 if __name__ == "__main__":
   if len(sys.argv) > 1:
     num_cookies = int(sys.argv[1])
