@@ -1,10 +1,25 @@
 #!/usr/bin/python
 
 import sys
-
+import math
 def making_change(amount, denominations):
-  pass 
+  result = [[] for i in denominations]
+  x = 0
+  def recursion_handler(n):
+    result[0].append(1)
+    for item in range(1,5):
+      if n >= denominations[item]:
+        holder = n - denominations[item]
+        total = result[item][holder] + result[item-1][n]
+        result[item].append(total)
+      if n < denominations[item]:
+        result[item].append(result[item-1][x])
+  while x <= amount:
+    recursion_handler(x)
+    x = x+1
+  return result[4][-1]
 
+print(making_change(10000, [1, 5, 10, 25, 50]))
 
 if __name__ == "__main__":
   # Test our your implementation from the command line
